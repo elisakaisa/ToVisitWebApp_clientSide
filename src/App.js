@@ -31,9 +31,6 @@ const App = () => {
 
   return (
     <Container>
-      <Typography variant="h3" component="div" gutterBottom>
-        Places to visit in the Stockholm area
-      </Typography>
       <Menu />
       <Routes>
         <Route path="/" element={<Home />} />
