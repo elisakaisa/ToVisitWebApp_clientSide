@@ -15,7 +15,7 @@ const Menu = () => {
       paddingBottom: 10
     }
     return (
-        <Box m={2} pt={3}>
+        <Box m={2} >
             <Paper elevation={0} >
                 <Breadcrumbs aria-label="breadcrumb">
                     <Link underline="hover"

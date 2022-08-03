@@ -1,7 +1,7 @@
 import React,  { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, Routes, useMatch } from 'react-router-dom'
-import { Container } from '@mui/material'
+import { Container, Box } from '@mui/material'
 import Typography from '@mui/material/Typography'
 
 // internal import
@@ -30,7 +30,7 @@ const App = () => {
 
 
   return (
-    <Container>
+    <Box m={2} pt={3}>
       <Menu />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -38,7 +38,7 @@ const App = () => {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/visits/:id" element={<VisitView visit={viewVisit}/>} />
       </Routes>
-    </Container>
+    </Box>
   )
 }
 

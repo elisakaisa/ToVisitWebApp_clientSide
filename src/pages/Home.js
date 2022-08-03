@@ -2,17 +2,17 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
-import { MoreHoriz } from '@mui/icons-material';
-import { Box } from '@mui/material';
+import { MoreHoriz } from '@mui/icons-material'
+import { Box } from '@mui/material'
 
 
 const Home = () => {
