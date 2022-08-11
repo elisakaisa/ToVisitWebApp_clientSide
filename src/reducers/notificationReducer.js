@@ -1,17 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = null
+const initialState = {
+    message: null,
+    type: null
+}
 
 
 const notificationSlice = createSlice({
     name:'notifications',
-    initialState,
+    initialState: initialState,
     reducers: {
         showNotification(state, action) {
             return action.payload
         },
         hideNotification(state, action) {
-            return null
+            return initialState
         }
     }
 })
@@ -20,9 +23,14 @@ export const { showNotification, hideNotification } = notificationSlice.actions
 
 let timeoutID = null
 
-export const setNotification = (message, timeout) => {
+export const setNotification = (message, type, timeout) => {
+    const notification = {
+        message: message,
+        type: type
+    }
+
     return async (dispatch) => {
-        dispatch(showNotification(message))
+        dispatch(showNotification((notification)))
 
         // if timer already going: clear it
         if (timeoutID) {

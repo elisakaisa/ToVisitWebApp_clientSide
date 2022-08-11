@@ -46,9 +46,9 @@ export const loginAction = ({ username, password}) => {
             setToken(user.token)
 
             dispatch(loginUser((user)))
-            //dispatch(setNotification(`Successfully logged in as ${user.name}!`, 5))
+            //dispatch(setNotification(`Successfully logged in as ${user.name}!`, 'success', 5))
         } catch (exception) {
-            dispatch(setNotification('Wrong credentials', 5))
+            dispatch(setNotification('Wrong credentials', 'error', 5))
         
         }
     }
