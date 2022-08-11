@@ -12,15 +12,28 @@ import LoginForm from './pages/LoginForm'
 import VisitView from './pages/VisitView'
 
 import { initializeVisits } from './reducers/visitReducer'
+import { loginActionWindow } from './reducers/loginReducer'
 
 
 const App = () => {
+
+  // logged in user
+  const user = useSelector((state) => state.login)
 
   const dispatch = useDispatch()
   useEffect(() => {
       dispatch(initializeVisits())
     }, [dispatch])
     const visits = useSelector(state => state.visits)
+
+  // fetch user from local storage
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser')
+    if (loggedUserJSON) {
+        const user = JSON.parse(loggedUserJSON)
+        dispatch(loginActionWindow(user))
+      }
+    }, [dispatch])
   
   // individual blog page
   const visitMatch = useMatch('/visits/:id')

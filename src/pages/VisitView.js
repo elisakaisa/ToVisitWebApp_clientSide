@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux'
+
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -11,7 +13,10 @@ import '../app.css'
 const VisitView = ({ visit }) => {
 
     // for checkbox
-    const [checked, setChecked] = useState(visit.done);
+    const [checked, setChecked] = useState(visit.done)
+
+    // logged in user
+    const user = useSelector((state) => state.login)
 
     const handleChange = (event) => {
         setChecked(event.target.checked)
@@ -40,22 +45,25 @@ const VisitView = ({ visit }) => {
                     <TextSnippet sx={{ mr: 0.5 }} fontSize="inherit" />&nbsp;
                     Notes: {visit.notes}<br/>
 
-
-                    <FormControlLabel control={<Checkbox 
-                                                    checked={checked}
-                                                    onChange={handleChange} />
-                                        } label="Been there, done that" /><br/>
-
-                    { visit.totalWalkingDistance && 
+                    {user.token && 
                         <>
-                            <Hiking sx={{ mr: 0.5 }} fontSize="inherit" />&nbsp;
-                            Total walking distance: {visit.totalWalkingDistance}<br/>
-                        </>
-                    }
-                    { visit.actualPrice && 
-                        <>
-                            <PriceCheck sx={{ mr: 0.5 }} fontSize="inherit" />&nbsp;
-                            Actual price: {visit.actualPrice}<br/>
+                            <FormControlLabel control={<Checkbox 
+                                                        checked={checked}
+                                                        onChange={handleChange} />
+                                            } label="Been there, done that" /><br/>
+
+                            { visit.totalWalkingDistance && 
+                                <>
+                                    <Hiking sx={{ mr: 0.5 }} fontSize="inherit" />&nbsp;
+                                    Total walking distance: {visit.totalWalkingDistance}<br/>
+                                </>
+                            }
+                            { visit.actualPrice && 
+                                <>
+                                    <PriceCheck sx={{ mr: 0.5 }} fontSize="inherit" />&nbsp;
+                                    Actual price: {visit.actualPrice}<br/>
+                                </>
+                            }
                         </>
                     }
 

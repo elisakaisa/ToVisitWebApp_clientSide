@@ -1,9 +1,17 @@
 import React, { useState } from "react"
+import { useDispatch } from 'react-redux'
+import { useNavigate } from "react-router-dom"
+
 import { Box, Button, Paper, TextField, Typography, Stack, IconButton, InputLabel, OutlinedInput } from '@mui/material'
 import { Login, Cancel, Visibility, VisibilityOff } from '@mui/icons-material'
 import InputAdornment from '@mui/material/InputAdornment'
 
+import { loginAction, loginActionWindow } from '../reducers/loginReducer'
+
 const LoginForm = () => {
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -16,9 +24,10 @@ const LoginForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        //dispatch(loginAction({ username, password }))
+        dispatch(loginAction({ username, password }))
         setUsername('')
         setPassword('')
+        //navigate('/') //FIXME:
     }
 
     const handleClickShowPassword = () => {

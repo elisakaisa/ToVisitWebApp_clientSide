@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import visitService from '../services/visitService'
 
+
 const visitSlice = createSlice({
     name: 'visits',
     initialState: [],
