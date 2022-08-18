@@ -1,17 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import loginService from '../services/loginService'
+import visitService from '../services/visitService'
 import { setNotification } from './notificationReducer'
 
 const initialState = {
     id: null,
     token: null,
     username: null
-}
-
-let token = null
-const setToken = (newToken) => {
-    token = `bearer ${newToken}`
 }
 
 const userSlice = createSlice({
@@ -43,7 +39,7 @@ export const loginAction = ({ username, password}) => {
                 'loggedBlogAppUser',
                 JSON.stringify(user)
             )
-            setToken(user.token)
+            visitService.setToken(user.token)
 
             dispatch(loginUser((user)))
             //dispatch(setNotification(`Successfully logged in as ${user.name}!`, 'success', 5))
@@ -62,7 +58,7 @@ export const loginActionWindow = (user) => {
                 'loggedBlogAppUser',
                 JSON.stringify(user)
             )
-            setToken(user.token)
+            visitService.setToken(user.token)
 
             dispatch(loginUser((user)))
     }
@@ -72,7 +68,7 @@ export const loginActionWindow = (user) => {
 export const logoutAction = () => {
     return async dispatch => {
         window.localStorage.removeItem('loggedBlogAppUser')
-        setToken(null)
+        visitService.setToken(null)
         dispatch(logoutUser())
     }
 }

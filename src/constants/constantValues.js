@@ -65,7 +65,7 @@ export const initValues = {
     what: '',
     where: '',
     category: [],
-    how: '',
+    how: [],
     timeLength: '',
     timeOfYear: initTimeOfYear,
     priceCategory: '',

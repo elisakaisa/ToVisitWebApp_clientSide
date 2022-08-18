@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { Box, Button, Paper, Typography, Stack } from '@mui/material'
 import { Add, Cancel } from "@mui/icons-material"
@@ -7,10 +8,13 @@ import { Add, Cancel } from "@mui/icons-material"
 import AlertNotification from "../components/AlertNotification"
 import { initTimeOfYear, initValues } from "../constants/constantValues"
 import AddVisitForm from "../components/AddVisitForm"
+import { createVisit } from "../reducers/visitReducer"
+import { setNotification } from "../reducers/notificationReducer"
 
 const AddVisit = () => {
 
     const notification = useSelector(state => state.notifications)
+    const dispatch = useDispatch()
 
     // states
     const [category, setCategory] = useState('') //TODO: allow multiple
@@ -26,9 +30,33 @@ const AddVisit = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        values.timeOfYear = timeOfYear
+
+        // validation
+        if (values.what === ''
+            || values.where === ''
+            || values.time === ''
+            || values.category === ''
+            || values.priceCategory === ''
+            || values.easeOfOrganization === ''
+            || values.how === '') {
+                dispatch(setNotification('Please fill all fields', 'error', 5))
+                return
+            }
+        const timeOfYearArray = []
+        for (const key in timeOfYear) {
+            if (timeOfYear[key]) {
+                timeOfYearArray.push(key)
+            }
+        }
+        values.timeOfYear = timeOfYearArray
+        if (timeOfYearArray.length === 0) {
+            dispatch(setNotification('Please fill all required fields', 'error', 5))
+            return
+        }
+        values.category = values.category.split(',')
+        values.how = values.how.split(',')
         console.log('values', values)
-        //dispatch(loginAction({ username, password }))
+        dispatch(createVisit(values))
         setTimeOfYear(initTimeOfYear)
         setValues(initValues)
     }
