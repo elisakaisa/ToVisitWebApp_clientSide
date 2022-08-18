@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom"
 
-import { Box, Button, Paper, TextField, Typography, Stack, IconButton, InputLabel, OutlinedInput } from '@mui/material'
+import { Box, Button, Paper, Typography, Stack, IconButton, InputLabel, OutlinedInput } from '@mui/material'
 import { Login, Cancel, Visibility, VisibilityOff } from '@mui/icons-material'
+import FormControl from '@mui/material/FormControl'
 import InputAdornment from '@mui/material/InputAdornment'
 
 import { loginAction } from '../reducers/loginReducer'
@@ -61,34 +62,38 @@ const LoginForm = () => {
             <Paper elevation={3} sx={{ p: 2 }}>
                 {notification.message && <AlertNotification />}
                 <div>
-                    <InputLabel htmlFor="component-outlined">Username</InputLabel>
-                    <OutlinedInput
-                        onChange={({ target }) => setUsername(target.value)}
-                        value={username}
-                        label={"Username"}
-                    />
+                    <FormControl sx={{ mb: 1, width: '40ch' }}>
+                        <InputLabel htmlFor="component-outlined">Username</InputLabel>
+                        <OutlinedInput
+                            onChange={({ target }) => setUsername(target.value)}
+                            value={username}
+                            label={"Username"}
+                        />
+                    </FormControl>
                 </div>
                 <div>
-                    <InputLabel htmlFor="component-outlined">Password</InputLabel>
-                    <OutlinedInput
-                        id="outlined-adornment-password"
-                        type={showPassword ? 'text' : 'password'}
-                        onChange={({ target }) => setPassword(target.value)}
-                        value={password}
-                        label={"Password"}
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                edge="end"
-                                >
-                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                </IconButton>
-                            </InputAdornment>
-                            }
-                    />
+                    <FormControl sx={{ mb: 1, width: '40ch' }}>
+                        <InputLabel htmlFor="component-outlined">Password</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-password"
+                            type={showPassword ? 'text' : 'password'}
+                            onChange={({ target }) => setPassword(target.value)}
+                            value={password}
+                            label={"Password"}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                    >
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                                }
+                        />
+                    </FormControl>
                 </div>
                 <div>
                     <Stack direction="row" spacing={2} sx={{ pt:2 }}>

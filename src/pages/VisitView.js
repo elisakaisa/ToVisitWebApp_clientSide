@@ -10,6 +10,8 @@ import { LocationOn, Category, AccountTree, AttachMoney, TextSnippet, Hiking, Pr
 import '../app.css'
 
 
+//TODO: add how!!!!!
+
 const VisitView = ({ visit }) => {
 
     // for checkbox
