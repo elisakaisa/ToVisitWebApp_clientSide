@@ -18,7 +18,6 @@ const LoginForm = () => {
     // logged in user
     const user = useSelector((state) => state.login)
     const notification = useSelector(state => state.notifications)
-    //console.log('notification', notification)
 
     // to navigate to home after used is logged in
     useEffect(() => {

@@ -7,12 +7,13 @@ import Typography from '@mui/material/Typography'
 // internal import
 import Menu from './components/Menu'
 import Home from './pages/Home'
-import AddVisitForm from './pages/AddVisitForm'
+import AddVisit from './pages/AddVisit'
 import LoginForm from './pages/LoginForm'
 import VisitView from './pages/VisitView'
 
 import { initializeVisits } from './reducers/visitReducer'
 import { loginActionWindow } from './reducers/loginReducer'
+import EditVisit from './pages/EditVisit'
 
 
 const App = () => {
@@ -41,15 +42,22 @@ const App = () => {
       ? visits.find((visit) => visit.id === visitMatch.params.id)
       : null
 
+  // individual visit edit page
+  const visitEditMatch = useMatch('/visits/:id/edit')
+  const viewEditVisit = visitEditMatch
+      ? visits.find((visit) => visit.id === visitEditMatch.params.id)
+      : null
+
 
   return (
     <Box m={2} pt={3}>
       <Menu />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/new" element={<AddVisitForm />} />
+        <Route path="/new" element={<AddVisit />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/visits/:id" element={<VisitView visit={viewVisit}/>} />
+        <Route path="/visits/:id/edit" element={<EditVisit visit={viewEditVisit}/>} />
       </Routes>
     </Box>
   )

@@ -1,5 +1,4 @@
-import React, { useState } from "react"
-import { useSelector } from 'react-redux'
+import React from 'react'
 
 import { Box, Button, TextField, Paper, Typography, Stack, IconButton, InputLabel, OutlinedInput, InputAdornment, FormControl, MenuItem, FormLabel, FormGroup } from '@mui/material'
 import { Tour, LocationOn, Category, Commute, 
@@ -11,112 +10,10 @@ import { Tour, LocationOn, Category, Commute,
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
-import AlertNotification from "../components/AlertNotification"
+import { timeLengthOptions, priceCategoryOptions, easeOfOrganizationOptions, initTimeOfYear, initValues } from "../constants/constantValues"
 
-const AddVisitForm = () => {
 
-    const notification = useSelector(state => state.notifications)
-
-    // init states
-    const initTimeOfYear = {
-        spring: false,
-        summer: false,
-        fall: false,
-        winter: false,
-        indoors: false,
-      }
-
-    // states
-    const [what, setWhat] = useState('')
-    const [where, setWhere] = useState('')
-    const [category, setCategory] = useState('') //TODO: allow multiple
-    const [how, setHow] = useState('') //TODO: make it dropdown menu?
-    const [timeLength, setTimeLength] = useState('')
-    const [timeOfYear, setTimeOfYear] = useState(initTimeOfYear)
-    const [priceCategory, setPriceCategory] = useState('') 
-    const [easeOfOrganization, setEaseOfOrganization] = useState('') 
-    const [notes, setNotes] = useState('')
-
-    // dropdown menus
-    const timeLengthOptions = [
-        {
-            value: 'day',
-            label: 'day',
-        },
-        {
-            value: 'weekend',
-            label: 'weekend',
-        },
-        {
-            value: 'long weekend',
-            label: 'long weekend',
-        },
-        {
-            value: 'week',
-            label: 'week',
-        },
-    ]
-
-    const priceCategoryOptions = [
-        {
-            value: 'free',
-            label: 'free',
-        },
-        {
-            value: '$',
-            label: '$',
-        },
-        {
-            value: '$$',
-            label: '$$',
-        },
-        {
-            value: '$$$',
-            label: '$$$',
-        },
-    ]
-
-    const easeOfOrganizationOptions = [
-        {
-            value: '*',
-            label: '*',
-        },
-        {
-            value: '**',
-            label: '**',
-        },
-        {
-            value: '***',
-            label: '***',
-        },
-    ]
-
-    const handleReset = () => {
-        setWhat('')
-        setWhere('')
-        setCategory('')
-        setHow('')
-        setTimeLength('')
-        setTimeOfYear(initTimeOfYear)
-        setPriceCategory('')
-        setEaseOfOrganization('')
-        setNotes('')
-    }
-
-    const handleSubmit = async (event) => {
-        event.preventDefault()
-        console.log(what, where, how, category, timeLength, timeOfYear, priceCategory, easeOfOrganization, notes)
-        //dispatch(loginAction({ username, password }))
-        setWhat('')
-        setWhere('')
-        setCategory('')
-        setHow('')
-        setTimeLength('')
-        setTimeOfYear(initTimeOfYear)
-        setPriceCategory('')
-        setEaseOfOrganization('')
-        setNotes('')
-    }
+const AddVisitForm = ({timeOfYear, setTimeOfYear, values, setValues, edit }) => {
 
     const handleTimeOfYearChange = (event) => {
         setTimeOfYear({
@@ -126,21 +23,18 @@ const AddVisitForm = () => {
     }
     const {spring, summer, fall, winter, indoors} = timeOfYear
 
+    const handleChange = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value })
+    }
+
     return (
-        <Box m={2} pt={3} component="form" sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-          }}>
-            <Typography variant="h5" component="div" gutterBottom>
-                Add a visit
-            </Typography>
-            <Paper elevation={3} sx={{ p: 2 }}>
-                {notification.message && <AlertNotification />}
-                <div>
+        <div>
+            <div>
                     <FormControl sx={{ m:1, width: '50ch' }}>
                         <InputLabel htmlFor="component-outlined">What</InputLabel>
                         <OutlinedInput
-                            onChange={({ target }) => setWhat(target.value)}
-                            value={what}
+                            onChange={handleChange('what')}
+                            value={values.what}
                             label={"What"}
                             startAdornment={
                             <InputAdornment position="start">
@@ -154,8 +48,8 @@ const AddVisitForm = () => {
                     <FormControl sx={{ m:1, width: '50ch' }}>
                         <InputLabel htmlFor="component-outlined">Where</InputLabel>
                         <OutlinedInput
-                            onChange={({ target }) => setWhere(target.value)}
-                            value={where}
+                            onChange={handleChange('where')}
+                            value={values.where}
                             label={"Where"}
                             startAdornment={
                             <InputAdornment position="start">
@@ -169,8 +63,8 @@ const AddVisitForm = () => {
                     <FormControl sx={{ m:1, width: '50ch' }}>
                         <InputLabel htmlFor="component-outlined">Category</InputLabel>
                         <OutlinedInput
-                            onChange={({ target }) => setCategory(target.value)}
-                            value={category}
+                            onChange={handleChange('category')}
+                            value={values.category}
                             label={"Add category"}
                             startAdornment={
                             <InputAdornment position="start">
@@ -184,9 +78,8 @@ const AddVisitForm = () => {
                     <FormControl sx={{ m:1, width: '50ch' }}>
                         <InputLabel htmlFor="component-outlined">How</InputLabel>
                         <OutlinedInput
-                            
-                            onChange={({ target }) => setHow(target.value)}
-                            value={how}
+                            onChange={handleChange('how')}
+                            value={values.how}
                             label={"How"}
                             startAdornment={
                             <InputAdornment position="start">
@@ -194,7 +87,6 @@ const AddVisitForm = () => {
                             </InputAdornment>
                             }
                         />
-                        
                     </FormControl>
                 </div>
                 <div>
@@ -203,16 +95,15 @@ const AddVisitForm = () => {
                         id="outlined-select-currency"
                         select
                         label="Time"
-                        value={timeLength}
-                        onChange={({ target }) => setTimeLength(target.value)}
+                        value={values.timeLength}
+                        onChange={handleChange('timeLength')}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="end">
                                     <HourglassBottom />
                                 </InputAdornment>
                             ),
-                        }}
-                        >
+                        }}>
                         {timeLengthOptions.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
                             {option.label}
@@ -228,8 +119,7 @@ const AddVisitForm = () => {
                                 control={
                                 <Checkbox checked={spring} onChange={handleTimeOfYearChange} name="spring" />
                                 }
-                                label={<LocalFlorist />}
-                            />
+                                label={<LocalFlorist />}/>
                             <FormControlLabel
                                 control={
                                 <Checkbox checked={summer} onChange={handleTimeOfYearChange} name="summer" />
@@ -263,8 +153,8 @@ const AddVisitForm = () => {
                         id="outlined-select-currency"
                         select
                         label="Price category"
-                        value={priceCategory}
-                        onChange={({ target }) => setPriceCategory(target.value)}
+                        value={values.priceCategory}
+                        onChange={handleChange('priceCategory')}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="end">
@@ -286,8 +176,8 @@ const AddVisitForm = () => {
                         id="outlined-select-currency"
                         select
                         label="Ease of organization"
-                        value={easeOfOrganization}
-                        onChange={({ target }) => setEaseOfOrganization(target.value)}
+                        value={values.easeOfOrganization}
+                        onChange={handleChange('easeOfOrganization')}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="end">
@@ -307,8 +197,8 @@ const AddVisitForm = () => {
                     <FormControl sx={{ m:1, width: '50ch' }}>
                         <InputLabel htmlFor="component-outlined">Notes</InputLabel>
                         <OutlinedInput
-                            onChange={({ target }) => setNotes(target.value)}
-                            value={notes}
+                            onChange={handleChange('notes')}
+                            value={values.notes}
                             label={"Notes"}
                             multiline={true}
                             startAdornment={
@@ -319,18 +209,7 @@ const AddVisitForm = () => {
                         />
                     </FormControl>
                 </div>
-                <div>
-                    <Stack direction="row" spacing={2} sx={{ pt:2, pl:1 }}>
-                        <Button variant="contained" onClick={handleSubmit} startIcon={<Add />}>
-                            Add
-                        </Button>
-                        <Button variant="outlined" onClick={handleReset} endIcon={<Cancel />}>
-                            Cancel
-                        </Button>
-                    </Stack>
-                </div>
-            </Paper>
-        </Box>
+        </div>
     )
 }
 
