@@ -31,4 +31,37 @@ const create = async (newObject) => {
     }
 }
 
-export default { getAll, create, setToken }
+const updateVisit = async (visit) => {
+    try {
+        const config = {
+            headers: { Authorization: token },
+        }
+
+        const updatedVisit = {
+            what: visit.what,
+            where: visit.where,
+            how: visit.how,
+            category: visit.category,
+            timeLength: visit.timeLength,
+            timeOfYear: visit.timeOfYear,
+            priceCategory: visit.priceCategory,
+            easeOfOrganization: visit.easeOfOrganization,
+            notes: visit.notes,
+            done: visit.done,
+            totalWalkingDistance: visit.totalWalkingDistance,
+            actualPrice: visit.actualPrice,
+        }
+        const response = await axios.patch(`${baseUrl}/${visit.id}`, updatedVisit, config)
+        return response.data
+    } catch (error) {
+        if (error.response.data.error) {
+            return error.response.data
+        } else if (error.response.data) {
+            return { error: error.response.data } // proxy errors
+        } else {
+            return { error: 'Unknown error' }
+        }
+    }
+}
+
+export default { getAll, create, setToken, updateVisit }

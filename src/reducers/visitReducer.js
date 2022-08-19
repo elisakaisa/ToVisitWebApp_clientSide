@@ -12,11 +12,19 @@ const visitSlice = createSlice({
         },
         appendVisit(state, action) {
             state.push(action.payload)
-          },
+        },
+        replaceVisit(state, action) {
+            console.log('reducer -> action.payload', action.payload)
+            const updatedVisit = action.payload
+            const { id } = updatedVisit
+            return state.map((visit) =>
+            visit.id !== id ? visit : updatedVisit
+          )
+        },
     }
 })
 
-export const { setVisits, appendVisit } = visitSlice.actions
+export const { setVisits, appendVisit, replaceVisit } = visitSlice.actions
 
 export const initializeVisits = content => {
     return async dispatch => {
@@ -35,6 +43,14 @@ export const createVisit = content => {
             dispatch(setNotification('Something went wrong', 'error', 5))
         }
       
+    }
+}
+
+export const updateVisit = visit => {
+    return async dispatch => {
+      const updatedVisit = await visitService.updateVisit(visit)
+      dispatch(replaceVisit(updatedVisit))
+      dispatch(setNotification('Visit updated', 'success', 5))
     }
   }
 

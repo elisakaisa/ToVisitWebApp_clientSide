@@ -17,8 +17,6 @@ const AddVisit = () => {
     const dispatch = useDispatch()
 
     // states
-    const [category, setCategory] = useState('') //TODO: allow multiple
-    const [how, setHow] = useState('') //TODO: make it dropdown menu?
     const [timeOfYear, setTimeOfYear] = useState(initTimeOfYear)
     const [values, setValues] = useState(initValues)
 
@@ -42,20 +40,13 @@ const AddVisit = () => {
                 dispatch(setNotification('Please fill all fields', 'error', 5))
                 return
             }
-        const timeOfYearArray = []
-        for (const key in timeOfYear) {
-            if (timeOfYear[key]) {
-                timeOfYearArray.push(key)
-            }
-        }
-        values.timeOfYear = timeOfYearArray
-        if (timeOfYearArray.length === 0) {
-            dispatch(setNotification('Please fill all required fields', 'error', 5))
-            return
-        }
+        // add seasons
+        values.timeOfYear = timeOfYear //TODO: add validation for seasons!!!
+        // split categories and how
         values.category = values.category.split(',')
         values.how = values.how.split(',')
-        console.log('values', values)
+        console.log(values)
+
         dispatch(createVisit(values))
         setTimeOfYear(initTimeOfYear)
         setValues(initValues)

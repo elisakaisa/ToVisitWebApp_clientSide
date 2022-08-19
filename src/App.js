@@ -10,7 +10,7 @@ import Home from './pages/Home'
 import AddVisit from './pages/AddVisit'
 import LoginForm from './pages/LoginForm'
 import VisitView from './pages/VisitView'
-
+import Footer from './components/Footer'
 import { initializeVisits } from './reducers/visitReducer'
 import { loginActionWindow } from './reducers/loginReducer'
 import EditVisit from './pages/EditVisit'
@@ -24,8 +24,9 @@ const App = () => {
   const dispatch = useDispatch()
   useEffect(() => {
       dispatch(initializeVisits())
-    }, [dispatch])
-    const visits = useSelector(state => state.visits)
+      console.log('rerender')
+  }, [dispatch])
+  const visits = useSelector(state => state.visits)
 
   // fetch user from local storage
   useEffect(() => {
@@ -59,6 +60,7 @@ const App = () => {
         <Route path="/visits/:id" element={<VisitView visit={viewVisit}/>} />
         <Route path="/visits/:id/edit" element={<EditVisit visit={viewEditVisit}/>} />
       </Routes>
+      <Footer />
     </Box>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 
 import Table from '@mui/material/Table'
@@ -13,6 +13,7 @@ import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import { MoreHoriz } from '@mui/icons-material'
 import { Box } from '@mui/material'
+import { initializeVisits } from '../reducers/visitReducer'
 
 
 const Home = () => {
@@ -23,7 +24,7 @@ const Home = () => {
 
     return (
         <Box m={2} pt={3}>
-            <Typography variant="h5" component="div" gutterBottom>
+            <Typography variant="h5" component="div" sx= {{ p:0.5 }} gutterBottom>
                 Places to visit in the Stockholm area
             </Typography>
             <Paper elevation={3}>
