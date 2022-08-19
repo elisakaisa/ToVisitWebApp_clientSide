@@ -13,7 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { Edit } from '@mui/icons-material'
 import { Stack } from '@mui/material'
 import '../app.css'
-import { updateVisit } from '../reducers/visitReducer'
+import { updateVisit, deleteVisit } from '../reducers/visitReducer'
 
 const VisitView = ({ visit }) => {
 
@@ -33,11 +33,13 @@ const VisitView = ({ visit }) => {
     }
 
     // delete visit
-    const deleteVisit = async (blog) => {
-        if (window.confirm(`Do you want to remove "${visit.what}"?`)) {
-            //dispatch(deleteBlog(blog.id))
-            navigate('/')
+    const onDeleteVisit = () => {
+        const ok = window.confirm(`Do you want to remove "${visit.what}"?`)
+        if (!ok) {
+            return
         }
+        dispatch(deleteVisit(visit.id))
+        navigate('/')
     }
 
     const navigateToEdit = () => {
@@ -104,7 +106,7 @@ const VisitView = ({ visit }) => {
                 
                 {user.token && 
                     <Stack direction="row" spacing={2} sx={{ p:2 }}>
-                        <Button variant="outlined" onClick={deleteVisit} startIcon={<DeleteIcon />}>
+                        <Button variant="outlined" onClick={onDeleteVisit} startIcon={<DeleteIcon />}>
                             Delete
                         </Button>
                         <Button variant="outlined" onClick={navigateToEdit} startIcon={<Edit />}>

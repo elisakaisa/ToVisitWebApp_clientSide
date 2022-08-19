@@ -10,21 +10,24 @@ const visitSlice = createSlice({
         setVisits(state, action) {
             return action.payload
         },
-        appendVisit(state, action) {
+        addNew(state, action) {
             state.push(action.payload)
         },
-        replaceVisit(state, action) {
-            console.log('reducer -> action.payload', action.payload)
+        update(state, action) {
             const updatedVisit = action.payload
             const { id } = updatedVisit
             return state.map((visit) =>
             visit.id !== id ? visit : updatedVisit
           )
         },
+        removeOne(state, action) {
+            console.log('action.data.id', action.payload)
+            return state.filter(visit => (visit.id !== action.payload))
+        },
     }
 })
 
-export const { setVisits, appendVisit, replaceVisit } = visitSlice.actions
+export const { setVisits, addNew, update, removeOne } = visitSlice.actions
 
 export const initializeVisits = content => {
     return async dispatch => {
@@ -37,21 +40,36 @@ export const createVisit = content => {
     return async dispatch => {
         try {
             const newVisit = await visitService.create(content)
-            dispatch(appendVisit(newVisit))
+            dispatch(addNew(newVisit))
             dispatch(setNotification(`Successfully added ${newVisit.what}`, 'success', 5))
         } catch (exception) {
             dispatch(setNotification('Something went wrong', 'error', 5))
         }
-      
     }
 }
 
 export const updateVisit = visit => {
     return async dispatch => {
-      const updatedVisit = await visitService.updateVisit(visit)
-      dispatch(replaceVisit(updatedVisit))
-      dispatch(setNotification('Visit updated', 'success', 5))
+        try {
+            const updatedVisit = await visitService.updateVisit(visit)
+            dispatch(update(updatedVisit))
+            dispatch(setNotification('Visit updated', 'success', 5))
+        } catch (exception) {
+            dispatch(setNotification('Something went wrong', 'error', 5))
+        }
     }
-  }
+}
+
+export const deleteVisit = (id) => {
+    return async dispatch => {
+        try {
+            const response = await visitService.removeVisit(id)
+            dispatch(removeOne(id))
+            dispatch(setNotification('Visit successfully removed', 'success', 5))
+        } catch (exception) {
+            dispatch(setNotification('Something went wrong', 'error', 5))
+        }
+    }
+}
 
 export default visitSlice.reducer

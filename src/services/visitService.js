@@ -64,4 +64,24 @@ const updateVisit = async (visit) => {
     }
 }
 
-export default { getAll, create, setToken, updateVisit }
+const removeVisit = async (id) => {
+    try {
+        /*const config = {
+            headers: { Authorization: token },
+        } */ //TODO: add token?
+
+        //const response = await axios.delete(`${baseUrl}/${id}`, config)
+        const response = await axios.delete(`${baseUrl}/${id}`)
+        return response.data
+    } catch (error) {
+        if (error.response.data.error) {
+            return error.response.data
+        } else if (error.response.data) {
+            return { error: error.response.data } // proxy errors
+        } else {
+            return { error: 'Unknown error' }
+        }
+    }
+}
+
+export default { getAll, create, setToken, updateVisit, removeVisit }

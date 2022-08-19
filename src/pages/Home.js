@@ -13,18 +13,15 @@ import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import { MoreHoriz } from '@mui/icons-material'
 import { Box } from '@mui/material'
-import { initializeVisits } from '../reducers/visitReducer'
 
 
 const Home = () => {
 
-    let visits = useSelector(
-        state => state.visits
-    )
+    let visits = useSelector(state => state.visits)
 
     return (
         <Box m={2} pt={3}>
-            <Typography variant="h5" component="div" sx= {{ p:0.5 }} gutterBottom>
+            <Typography variant="h5" component="div" sx= {{ p:0.5, pb:1 }} gutterBottom>
                 Places to visit in the Stockholm area
             </Typography>
             <Paper elevation={3}>
@@ -32,10 +29,10 @@ const Home = () => {
                     <Table sx={{ minWidth: 650}} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                            <TableCell>What</TableCell>
-                            <TableCell align="right">Where</TableCell>
-                            <TableCell align="right">Category</TableCell>
-                            <TableCell align="right">Price</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>What</TableCell>
+                            <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Where</TableCell>
+                            <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Category</TableCell>
+                            <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Price</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -57,7 +54,7 @@ const Home = () => {
                                     </TableCell>
                                     <TableCell align="right">{visit.where}</TableCell>
                                     <TableCell align="right">
-                                    {visit.category.map(cat => <div key={cat}> {cat}</div> )}
+                                        {visit.category.map(cat => <div key={cat}> {cat}</div> )}
                                     </TableCell>
                                     <TableCell align="right">{visit.priceCategory}</TableCell>
 
@@ -67,8 +64,7 @@ const Home = () => {
                     </Table>
                 </TableContainer>
             </Paper>
-        </Box>
-        
+        </Box>  
     )
 }
 
