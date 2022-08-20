@@ -10,6 +10,9 @@ const visitSlice = createSlice({
         setVisits(state, action) {
             return action.payload
         },
+        setOne(state, action) {
+            return action.payload
+        },
         addNew(state, action) {
             state.push(action.payload)
         },
@@ -21,18 +24,24 @@ const visitSlice = createSlice({
           )
         },
         removeOne(state, action) {
-            console.log('action.data.id', action.payload)
             return state.filter(visit => (visit.id !== action.payload))
         },
     }
 })
 
-export const { setVisits, addNew, update, removeOne } = visitSlice.actions
+export const { setVisits, setOne, addNew, update, removeOne } = visitSlice.actions
 
 export const initializeVisits = content => {
     return async dispatch => {
         const visits = await visitService.getAll()
         dispatch(setVisits(visits))
+    }
+}
+
+export const getOneVisit = visit => {
+    return async dispatch => {
+        const visit = await visitService.getOne(visit)
+        dispatch(setOne(visit))
     }
 }
 

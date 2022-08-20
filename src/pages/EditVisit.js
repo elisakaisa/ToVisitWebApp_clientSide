@@ -30,19 +30,25 @@ const EditVisit = ({ visit }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        // validation
+        if (values.what === ''
+            || values.where === ''
+            || values.time === ''
+            || values.category === ''
+            || values.priceCategory === ''
+            || values.easeOfOrganization === ''
+            || values.how === '') {
+                dispatch(setNotification('Please fill all required fields', 'error', 5))
+                return
+            }
         // add seasons
         //TODO: add validation for seasons!!!
-        const updatedValues = {
-            ...values,
-            timeOfYear: timeOfYear,
-        }
+        const updatedValues = { ...values, timeOfYear: timeOfYear }
         // split categories and how TODO: figure out a way so it doesn't crash
         //values.category = values.category.split(',')
         //values.how = values.how.split(',')
 
         dispatch(updateVisit(updatedValues))
-        //setTimeOfYear(initTimeOfYear)
-        //setValues(initValues)
     }
 
     return (

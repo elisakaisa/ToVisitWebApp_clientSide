@@ -12,6 +12,11 @@ const getAll = async () => {
     return response.data
 }
 
+const getOne = async (visit) => {
+    const response = await axios.get(`${baseUrl}/${visit.id}`)
+    return response.data
+}
+
 const create = async (newObject) => {
     try {
         const config = {
@@ -84,4 +89,4 @@ const removeVisit = async (id) => {
     }
 }
 
-export default { getAll, create, setToken, updateVisit, removeVisit }
+export default { getAll, getOne, create, setToken, updateVisit, removeVisit }

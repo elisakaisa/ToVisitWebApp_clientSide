@@ -14,6 +14,7 @@ import Footer from './components/Footer'
 import { initializeVisits } from './reducers/visitReducer'
 import { loginActionWindow } from './reducers/loginReducer'
 import EditVisit from './pages/EditVisit'
+import Search from './pages/Search'
 
 
 const App = () => {
@@ -24,7 +25,6 @@ const App = () => {
   const dispatch = useDispatch()
   useEffect(() => {
       dispatch(initializeVisits())
-      console.log('rerender')
   }, [dispatch])
   const visits = useSelector(state => state.visits)
 
@@ -59,6 +59,7 @@ const App = () => {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/visits/:id" element={<VisitView visit={viewVisit}/>} />
         <Route path="/visits/:id/edit" element={<EditVisit visit={viewEditVisit}/>} />
+        <Route path="/search" element={<Search />} />
       </Routes>
       <Footer />
     </Box>

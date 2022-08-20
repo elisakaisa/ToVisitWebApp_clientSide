@@ -14,28 +14,18 @@ import { timeLengthOptions, priceCategoryOptions, easeOfOrganizationOptions } fr
 
 const AddVisitForm = ({timeOfYear, setTimeOfYear, values, setValues, edit }) => {
 
-    const seasons = []
-
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value })
     }
 
     const handleBooleanChange = (event) => {
-        setValues({
-            ...values, 
-            [event.target.name]: event.target.checked,
-        })
+        setValues({ ...values, [event.target.name]: event.target.checked })
     }
 
     const handleTimeOfYearChange = (event) => {
-        setTimeOfYear({
-          ...timeOfYear,
-          [event.target.name]: event.target.checked,
-        })
+        setTimeOfYear({ ...timeOfYear, [event.target.name]: event.target.checked })
     } 
     const {spring, summer, fall, winter, indoors} = timeOfYear
-    const done = values.done
-
 
     return (
         <div>
@@ -228,7 +218,7 @@ const AddVisitForm = ({timeOfYear, setTimeOfYear, values, setValues, edit }) => 
                             <FormGroup aria-label="position" row>
                                 <FormControlLabel
                                     control={
-                                    <Checkbox checked={done} onChange={handleBooleanChange} name="done" />
+                                    <Checkbox checked={values.done} onChange={handleBooleanChange} name="done" />
                                     }
                                     label={'done'}/>
                             </FormGroup>

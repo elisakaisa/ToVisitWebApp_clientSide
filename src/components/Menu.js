@@ -8,6 +8,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import AddBoxIcon from '@mui/icons-material/AddBox'
 import LoginIcon from '@mui/icons-material/Login'
 import LogoutIcon from '@mui/icons-material/Logout'
+import { Search } from '@mui/icons-material'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 
@@ -52,6 +53,18 @@ const Menu = () => {
                         to="/new">
                         <AddBoxIcon sx={{ mr: 0.5 }} fontSize="inherit" />
                         New visit
+                        </Link>
+                    }
+                    {user.token && 
+                        <Link
+                        underline="hover"
+                        sx={{ display: 'flex', alignItems: 'center' }}
+                        color="inherit"
+                        component={RouterLink}
+                        fontSize="inherit"
+                        to="/search">
+                        <Search sx={{ mr: 0.5 }} fontSize="inherit" />
+                        Search
                         </Link>
                     }
                     {!user.token && 

@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 
+import AlertNotification from '../components/AlertNotification'
+
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -18,6 +20,7 @@ import { Box } from '@mui/material'
 const Home = () => {
 
     let visits = useSelector(state => state.visits)
+    const notification = useSelector(state => state.notifications)
 
     return (
         <Box m={2} pt={3}>
@@ -25,6 +28,7 @@ const Home = () => {
                 Places to visit in the Stockholm area
             </Typography>
             <Paper elevation={3}>
+                {notification.message && <AlertNotification />}
                 <TableContainer components={Paper}>
                     <Table sx={{ minWidth: 650}} aria-label="simple table">
                         <TableHead>
