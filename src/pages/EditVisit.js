@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { Box, Button, Paper, Typography, Stack } from '@mui/material'
+import { Box, Button, Typography, Stack } from '@mui/material'
 import { Save, Cancel } from '@mui/icons-material'
 
-import AlertNotification from "../components/AlertNotification"
 import AddVisitForm from '../components/AddVisitForm'
 import { updateVisit } from '../reducers/visitReducer'
 import { setNotification } from "../reducers/notificationReducer"
@@ -20,7 +19,6 @@ const EditVisit = ({ visit }) => {
                         category: visit.category.toString() }
     const initTimeOfYear = visit.timeOfYear // needed, bc otherwise reset does not work weel
 
-    const notification = useSelector(state => state.notifications)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -70,27 +68,24 @@ const EditVisit = ({ visit }) => {
             <Typography variant="h5" component="div" gutterBottom>
                 Edit visit {visit.what}
             </Typography>
-            <Paper elevation={3} sx={{ p: 2 }}>
-                {notification.message && <AlertNotification />}
-                <AddVisitForm 
-                    timeOfYear={timeOfYear} 
-                    setTimeOfYear={setTimeOfYear}
-                    values={values}
-                    setValues={setValues} 
-                    edit={true}
-                    />
-                <div>
-                    <Stack direction="row" spacing={2} sx={{ pt:2, pl:1 }}>
-                        <Button variant="contained" onClick={handleSubmit} startIcon={<Save />}>
-                            Edit
-                        </Button>
-                        <Button variant="outlined" onClick={handleReset} endIcon={<Cancel />}>
-                            Cancel
-                        </Button>
-                    </Stack>
-                </div>
-            </Paper>
-        </Box>
+            <AddVisitForm 
+                timeOfYear={timeOfYear} 
+                setTimeOfYear={setTimeOfYear}
+                values={values}
+                setValues={setValues} 
+                edit={true}
+                />
+            <div>
+                <Stack direction="row" spacing={2} sx={{ pt:2, pl:1 }}>
+                    <Button variant="contained" onClick={handleSubmit} startIcon={<Save />}>
+                        Edit
+                    </Button>
+                    <Button variant="outlined" onClick={handleReset} endIcon={<Cancel />}>
+                        Cancel
+                    </Button>
+                </Stack>
+            </div>
+    </Box>
     )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Search = () => {
+const Analytics = () => {
 
     return (
         <div>
@@ -9,4 +9,4 @@ const Search = () => {
     )
 }
 
-export default Search
+export default Analytics

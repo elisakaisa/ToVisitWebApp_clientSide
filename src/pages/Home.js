@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
-
-import AlertNotification from '../components/AlertNotification'
 
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -20,15 +18,13 @@ import { Box } from '@mui/material'
 const Home = () => {
 
     let visits = useSelector(state => state.visits)
-    const notification = useSelector(state => state.notifications)
 
     return (
-        <Box m={2} pt={3}>
-            <Typography variant="h5" component="div" sx= {{ p:0.5, pb:1 }} gutterBottom>
+        <>
+            <Typography variant="h5" component="div" sx= {{ p:1, m:1 }} gutterBottom>
                 Places to visit in the Stockholm area
             </Typography>
             <Paper elevation={3}>
-                {notification.message && <AlertNotification />}
                 <TableContainer components={Paper}>
                     <Table sx={{ minWidth: 650}} aria-label="simple table">
                         <TableHead>
@@ -37,6 +33,7 @@ const Home = () => {
                             <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Where</TableCell>
                             <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Category</TableCell>
                             <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Price</TableCell>
+                            <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Ease of organization</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -61,6 +58,7 @@ const Home = () => {
                                         {visit.category.map(cat => <div key={cat}> {cat}</div> )}
                                     </TableCell>
                                     <TableCell align="right">{visit.priceCategory}</TableCell>
+                                    <TableCell align="right">{visit.easeOfOrganization}</TableCell>
 
                                 </TableRow>
                             ))}
@@ -68,7 +66,7 @@ const Home = () => {
                     </Table>
                 </TableContainer>
             </Paper>
-        </Box>  
+        </>  
     )
 }
 

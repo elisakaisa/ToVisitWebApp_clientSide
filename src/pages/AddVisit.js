@@ -1,11 +1,9 @@
 import React, { useState } from "react"
-import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 
-import { Box, Button, Paper, Typography, Stack } from '@mui/material'
+import { Box, Button, Typography, Stack } from '@mui/material'
 import { Add, Cancel } from "@mui/icons-material"
 
-import AlertNotification from "../components/AlertNotification"
 import { initTimeOfYear, initValues } from "../constants/constantValues"
 import AddVisitForm from "../components/AddVisitForm"
 import { createVisit } from "../reducers/visitReducer"
@@ -13,7 +11,6 @@ import { setNotification } from "../reducers/notificationReducer"
 
 const AddVisit = () => {
 
-    const notification = useSelector(state => state.notifications)
     const dispatch = useDispatch()
 
     // states
@@ -57,14 +54,12 @@ const AddVisit = () => {
     }
 
     return (
-        <Box m={2} pt={3} component="form" sx={{
+        <Box m={2} pt={1} component="form" sx={{
             '& .MuiTextField-root': { m: 1, width: '25ch' },
           }}>
             <Typography variant="h5" component="div" gutterBottom>
                 Add a visit
             </Typography>
-            <Paper elevation={3} sx={{ p: 2 }}>
-                {notification.message && <AlertNotification />}
                 <AddVisitForm 
                     timeOfYear={timeOfYear} 
                     setTimeOfYear={setTimeOfYear}
@@ -82,7 +77,6 @@ const AddVisit = () => {
                         </Button>
                     </Stack>
                 </div>
-            </Paper>
         </Box>
     )
 }

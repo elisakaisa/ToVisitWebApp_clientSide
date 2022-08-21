@@ -270,7 +270,6 @@ const AddVisitForm = ({timeOfYear, setTimeOfYear, values, setValues, edit }) => 
                     }
                 </>
             }
-
         </div>
     )
 }
