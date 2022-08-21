@@ -40,12 +40,16 @@ const AddVisit = () => {
                 dispatch(setNotification('Please fill all fields', 'error', 5))
                 return
             }
-        // add seasons
-        values.timeOfYear = timeOfYear //TODO: add validation for seasons!!!
+        // validate & add seasons
+        if (!timeOfYear.spring && !timeOfYear.summer && !timeOfYear.fall 
+            && !timeOfYear.winter && !timeOfYear.indoors) {
+                dispatch(setNotification('Please set a time of year', 'error', 5))
+                return
+        }
+        values.timeOfYear = timeOfYear
         // split categories and how
         values.category = values.category.split(',')
         values.how = values.how.split(',')
-        console.log(values)
 
         dispatch(createVisit(values))
         setTimeOfYear(initTimeOfYear)

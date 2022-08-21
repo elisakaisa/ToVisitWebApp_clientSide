@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { TextField, InputLabel, OutlinedInput, InputAdornment, FormControl, MenuItem, FormLabel, FormGroup } from '@mui/material'
+import { TextField, InputLabel, OutlinedInput, 
+    InputAdornment, FormControl, FormHelperText,
+    MenuItem, FormLabel, FormGroup } from '@mui/material'
 import { Tour, LocationOn, Category, Commute, 
     AccountTree, AttachMoney, TextSnippet, 
     Hiking, PriceCheck, HourglassBottom,
-    LocalFlorist, Apartment,
-    BeachAccess, AcUnit } from "@mui/icons-material"
+    LocalFlorist, Apartment, AcUnit,
+    Umbrella, WbSunny } from "@mui/icons-material"
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
@@ -25,73 +27,77 @@ const AddVisitForm = ({timeOfYear, setTimeOfYear, values, setValues, edit }) => 
     const handleTimeOfYearChange = (event) => {
         setTimeOfYear({ ...timeOfYear, [event.target.name]: event.target.checked })
     } 
+
     const {spring, summer, fall, winter, indoors} = timeOfYear
 
     return (
         <div>
             <div>
                 <FormControl sx={{ m:1, width: '50ch' }}>
-                    <InputLabel htmlFor="component-outlined">What</InputLabel>
+                    <InputLabel required htmlFor="component-outlined">What</InputLabel>
                     <OutlinedInput
                         onChange={handleChange('what')}
                         value={values.what}
                         label={"What"}
                         startAdornment={
-                        <InputAdornment position="start">
-                            <Tour />
-                        </InputAdornment>
+                            <InputAdornment position="start">
+                                <Tour />
+                            </InputAdornment>
                         }
                     />
                 </FormControl>
             </div>
             <div>
                 <FormControl sx={{ m:1, width: '50ch' }}>
-                    <InputLabel htmlFor="component-outlined">Where</InputLabel>
+                    <InputLabel required htmlFor="component-outlined">Where</InputLabel>
                     <OutlinedInput
                         onChange={handleChange('where')}
                         value={values.where}
                         label={"Where"}
                         startAdornment={
-                        <InputAdornment position="start">
-                            <LocationOn />
-                        </InputAdornment>
+                            <InputAdornment position="start">
+                                <LocationOn />
+                            </InputAdornment>
                         }
                     />
                 </FormControl>
             </div>
             <div>
                 <FormControl sx={{ m:1, width: '50ch' }}>
-                    <InputLabel htmlFor="component-outlined">Category</InputLabel>
+                    <InputLabel required htmlFor="component-outlined">Category</InputLabel>
                     <OutlinedInput
                         onChange={handleChange('category')}
                         value={values.category}
                         label={"Add category"}
                         startAdornment={
-                        <InputAdornment position="start">
-                            <Category />
-                        </InputAdornment>
+                            <InputAdornment position="start">
+                                <Category />
+                            </InputAdornment>
                         }
                     />
+                    <FormHelperText id="outlined-weight-helper-text">Add multiple by separating by ','</FormHelperText>
                 </FormControl>
             </div>
             <div>
                 <FormControl sx={{ m:1, width: '50ch' }}>
-                    <InputLabel htmlFor="component-outlined">How</InputLabel>
+                    <InputLabel required htmlFor="component-outlined">How</InputLabel>
                     <OutlinedInput
                         onChange={handleChange('how')}
                         value={values.how}
                         label={"How"}
                         startAdornment={
-                        <InputAdornment position="start">
-                            <Commute />
-                        </InputAdornment>
+                            <InputAdornment position="start">
+                                <Commute />
+                            </InputAdornment>
                         }
                     />
+                    <FormHelperText id="outlined-weight-helper-text">Add multiple by separating by ','</FormHelperText>
                 </FormControl>
             </div>
             <div>
                 <TextField
                     style={{ width: 400}}
+                    required
                     id="outlined-select-currency"
                     select
                     label="Time"
@@ -113,7 +119,7 @@ const AddVisitForm = ({timeOfYear, setTimeOfYear, values, setValues, edit }) => 
             </div>
             <div>
                 <FormControl sx={{ m: 1 }} component="fieldset" variant="standard">
-                    <FormLabel component="legend">Time of year</FormLabel>
+                    <FormLabel required component="legend">Time of year</FormLabel>
                     <FormGroup aria-label="position" row>
                         <FormControlLabel
                             control={
@@ -124,13 +130,13 @@ const AddVisitForm = ({timeOfYear, setTimeOfYear, values, setValues, edit }) => 
                             control={
                             <Checkbox checked={summer} onChange={handleTimeOfYearChange} name="summer" />
                             }
-                            label={<BeachAccess />}
+                            label={<WbSunny />}
                         />
                         <FormControlLabel
                             control={
                             <Checkbox checked={fall} onChange={handleTimeOfYearChange} name="fall" />
                             }
-                            label="Fall"
+                            label={<Umbrella />}
                         />
                         <FormControlLabel
                             control={
@@ -150,6 +156,7 @@ const AddVisitForm = ({timeOfYear, setTimeOfYear, values, setValues, edit }) => 
             <div>
                 <TextField
                     style={{ width: 400}}
+                    required
                     id="outlined-select-currency"
                     select
                     label="Price category"
@@ -173,6 +180,7 @@ const AddVisitForm = ({timeOfYear, setTimeOfYear, values, setValues, edit }) => 
             <div>
                 <TextField
                     style={{ width: 400}}
+                    required
                     id="outlined-select-currency"
                     select
                     label="Ease of organization"

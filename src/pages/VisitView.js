@@ -8,7 +8,9 @@ import Button from '@mui/material/Button'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import Typography from '@mui/material/Typography'
-import { LocationOn, Category, AccountTree, AttachMoney, TextSnippet, Hiking, PriceCheck, HourglassBottom, CalendarMonth, Commute } from "@mui/icons-material"
+import { LocationOn, Category, AccountTree, AttachMoney, 
+    TextSnippet, Hiking, PriceCheck, HourglassBottom, 
+    CalendarMonth, Commute } from "@mui/icons-material"
 import DeleteIcon from '@mui/icons-material/Delete'
 import { Edit } from '@mui/icons-material'
 import { Stack } from '@mui/material'
@@ -25,10 +27,7 @@ const VisitView = ({ visit }) => {
     const notification = useSelector(state => state.notifications)
 
     const handleChange = (event) => {
-        const updatedVisit = {
-            ...visit,
-            done: event.target.checked
-        }
+        const updatedVisit = { ...visit, done: event.target.checked }
         dispatch(updateVisit(updatedVisit))
     }
 
@@ -44,6 +43,10 @@ const VisitView = ({ visit }) => {
 
     const navigateToEdit = () => {
         navigate(`/visits/${visit.id}/edit`)
+    }
+
+    if (!visit) {
+        return null
     }
 
     // change season objects to array
@@ -90,13 +93,13 @@ const VisitView = ({ visit }) => {
                                 { visit.totalWalkingDistance && 
                                     <>
                                         <Hiking sx={{ mr: 0.5 }} fontSize="inherit" />&nbsp;
-                                        Total walking distance: {visit.totalWalkingDistance}<br/>
+                                        Total walking distance: {visit.totalWalkingDistance} km<br/>
                                     </>
                                 }
                                 { visit.actualPrice && 
                                     <>
                                         <PriceCheck sx={{ mr: 0.5 }} fontSize="inherit" />&nbsp;
-                                        Actual price: {visit.actualPrice}<br/>
+                                        Actual price: {visit.actualPrice} SEK<br/>
                                     </>
                                 }
                             </>
