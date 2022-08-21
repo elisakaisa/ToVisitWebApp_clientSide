@@ -62,7 +62,7 @@ const EditVisit = ({ visit }) => {
     }
 
     return (
-        <Box m={2} pt={3} component="form" sx={{
+        <Box m={2} component="form" sx={{
             '& .MuiTextField-root': { m: 1, width: '25ch' },
           }}>
             <Typography variant="h5" component="div" gutterBottom>

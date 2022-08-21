@@ -93,7 +93,7 @@ const VisitView = ({ visit }) => {
                                     Total walking distance: {visit.totalWalkingDistance} km<br/>
                                 </>
                             }
-                            { visit.actualPrice && 
+                            { visit.done && 
                                 <>
                                     <PriceCheck sx={{ mr: 0.5 }} fontSize="inherit" />&nbsp;
                                     Actual price: {visit.actualPrice} SEK<br/>

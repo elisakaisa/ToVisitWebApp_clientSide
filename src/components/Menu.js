@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
 
 import Link from '@mui/material/Link'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
@@ -15,24 +15,21 @@ import Paper from '@mui/material/Paper'
 import { logoutAction } from '../reducers/loginReducer'
 
 const Menu = () => {
-    const padding = {
-      paddingRight: 10,
-      paddingLeft: 10,
-      paddingBottom: 10
-    }
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     // logged in user
     const user = useSelector((state) => state.login)
 
     const handleLogout = () => {
         dispatch(logoutAction())
+        navigate('/')
     }
 
     return (
-        <Box m={2} >
-            <Paper elevation={0} >
+        <Box p={1} pl={2} >
+            <Paper elevation={0} sx= {{ p:1, backgroundColor:  "#010204"}}>
                 <Breadcrumbs aria-label="breadcrumb">
                     <Link underline="hover"
                         sx={{ display: 'flex', alignItems: 'center' }}
@@ -41,7 +38,6 @@ const Menu = () => {
                         fontSize="inherit"
                         to="/">
                         <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-                        Home
                     </Link>
                     {user.token && 
                         <Link
@@ -106,7 +102,6 @@ const Menu = () => {
                 </Breadcrumbs>
             </Paper>
         </Box>
-        
     )
 }
 

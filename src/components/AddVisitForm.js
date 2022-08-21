@@ -75,7 +75,7 @@ const AddVisitForm = ({timeOfYear, setTimeOfYear, values, setValues, edit }) => 
                             </InputAdornment>
                         }
                     />
-                    <FormHelperText id="outlined-weight-helper-text">Add multiple by separating by ','</FormHelperText>
+                    <FormHelperText id="outlined-weight-helper-text">Add multiple by separating by ' '</FormHelperText>
                 </FormControl>
             </div>
             <div>
@@ -91,7 +91,7 @@ const AddVisitForm = ({timeOfYear, setTimeOfYear, values, setValues, edit }) => 
                             </InputAdornment>
                         }
                     />
-                    <FormHelperText id="outlined-weight-helper-text">Add multiple by separating by ','</FormHelperText>
+                    <FormHelperText id="outlined-weight-helper-text">Add multiple by separating by ' '</FormHelperText>
                 </FormControl>
             </div>
             <div>

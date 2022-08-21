@@ -5,8 +5,8 @@ import { GitHub, LinkedIn } from '@mui/icons-material'
 
 const Footer = () => {
     return (
-        <Box m={2} mt={4}>
-            <Typography variant="body2" component="div" sx={{ p:0.5 }} gutterBottom >
+        <Box p={2} mt={4}>
+            <Typography variant="body2" component="div" sx={{ m:2 }} gutterBottom >
                 Webapp developed by Elisa Perini &nbsp;
                 <IconButton href="https://github.com/elisakaisa" fontSize="inherit" target="_blank" rel="noopener noreferrer">
                     <GitHub />

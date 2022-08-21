@@ -54,7 +54,7 @@ const AddVisit = () => {
     }
 
     return (
-        <Box m={2} pt={1} component="form" sx={{
+        <Box m={2} component="form" sx={{
             '& .MuiTextField-root': { m: 1, width: '25ch' },
           }}>
             <Typography variant="h5" component="div" gutterBottom>

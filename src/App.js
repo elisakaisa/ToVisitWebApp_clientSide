@@ -16,12 +16,31 @@ import { loginActionWindow } from './reducers/loginReducer'
 import EditVisit from './pages/EditVisit'
 import Search from './pages/Search'
 import Analytics from './pages/Analytics'
+import Category from './pages/Category'
+
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    background: {
+      default: "#010204"
+    },
+    primary: {
+      light: '#0C4160',
+      main: '#738FA7'
+    },
+    text: {
+      primary: "#ffffff"
+    }
+  },
+});
 
 
 const App = () => {
 
   // States
-  const user = useSelector((state) => state.login)
   const notification = useSelector(state => state.notifications)
 
   const dispatch = useDispatch()
@@ -54,10 +73,12 @@ const App = () => {
   // category page
   const visitCategoryMatch = useMatch('visits/category/:category')
   let categoryMatch = []
+  let category = null
   if (visitCategoryMatch) {
     visits.filter(visit => visit.category.find(item => {
       if (item === visitCategoryMatch.params.category) {
         categoryMatch.push(visit)
+        category = visitCategoryMatch.params.category
       }
     }))
   } else {
@@ -65,25 +86,30 @@ const App = () => {
   }
 
   return (
-    <Box m={2} pt={3}>
-      <Menu />
-      {notification.message && <AlertNotification />}
-      <Box m={2} pt={3} >
-        <Paper elevation={3} sx= {{ p:1 }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/new" element={<AddVisit />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/visits/:id" element={<VisitView visit={viewVisit}/>} />
-            <Route path="/visits/:id/edit" element={<EditVisit visit={viewEditVisit}/>} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/analytics" element={<Analytics />} />
-            <Route path="/visits/category/:category" element={<Search visits={categoryMatch} />} />
-          </Routes>
-        </Paper>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Box m={2} pt={3}>
+        <Menu />
+        {notification.message && <AlertNotification />}
+        <Box m={2} >
+          <Paper elevation={3} sx= {{ p:1, backgroundColor: "#040a1a" }} >
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/new" element={<AddVisit />} />
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/visits/:id" element={<VisitView visit={viewVisit}/>} />
+              <Route path="/visits/:id/edit" element={<EditVisit visit={viewEditVisit}/>} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/analytics" element={<Analytics />} />
+              <Route path="/visits/category/:category" element={
+                      <Category visits={categoryMatch} filteredBy={category}/>
+                    } />
+            </Routes>
+          </Paper>
+        </Box>
+        <Footer />
       </Box>
-      <Footer />
-    </Box>
+    </ThemeProvider>
   )
 }
 
