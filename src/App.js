@@ -51,6 +51,18 @@ const App = () => {
       ? visits.find((visit) => visit.id === visitEditMatch.params.id)
       : null
 
+  // category page
+  const visitCategoryMatch = useMatch('visits/category/:category')
+  let categoryMatch = []
+  if (visitCategoryMatch) {
+    visits.filter(visit => visit.category.find(item => {
+      if (item === visitCategoryMatch.params.category) {
+        categoryMatch.push(visit)
+      }
+    }))
+  } else {
+    categoryMatch = null
+  }
 
   return (
     <Box m={2} pt={3}>
@@ -66,6 +78,7 @@ const App = () => {
             <Route path="/visits/:id/edit" element={<EditVisit visit={viewEditVisit}/>} />
             <Route path="/search" element={<Search />} />
             <Route path="/analytics" element={<Analytics />} />
+            <Route path="/visits/category/:category" element={<Search visits={categoryMatch} />} />
           </Routes>
         </Paper>
       </Box>

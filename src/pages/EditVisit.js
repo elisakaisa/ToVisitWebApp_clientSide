@@ -15,8 +15,8 @@ const EditVisit = ({ visit }) => {
         return null
     }
     const initVisit = { ...visit, 
-                        how: visit.how.toString(), 
-                        category: visit.category.toString() }
+                        how: visit.how.join(' '), 
+                        category: visit.category.join(' ') }
     const initTimeOfYear = visit.timeOfYear // needed, bc otherwise reset does not work weel
 
     const dispatch = useDispatch()
@@ -53,8 +53,8 @@ const EditVisit = ({ visit }) => {
         // add seasons, reform arrays
         const updatedValues = { ...values, 
                                 timeOfYear: timeOfYear,
-                                category: values.category.split(',') ,
-                                how: values.how.split(',')
+                                category: values.category.split(' ') ,
+                                how: values.how.split(' ')
                             }
 
         dispatch(updateVisit(updatedValues))

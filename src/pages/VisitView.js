@@ -23,7 +23,6 @@ const VisitView = ({ visit }) => {
 
     // states
     const user = useSelector((state) => state.login)
-    const notification = useSelector(state => state.notifications)
 
     const handleChange = (event) => {
         const updatedVisit = { ...visit, done: event.target.checked }

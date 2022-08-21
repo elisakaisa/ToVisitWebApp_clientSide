@@ -45,8 +45,8 @@ const AddVisit = () => {
         }
         values.timeOfYear = timeOfYear
         // split categories and how
-        values.category = values.category.split(',')
-        values.how = values.how.split(',')
+        values.category = values.category.split(' ')
+        values.how = values.how.split(' ')
 
         dispatch(createVisit(values))
         setTimeOfYear(initTimeOfYear)

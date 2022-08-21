@@ -12,7 +12,6 @@ import Paper from '@mui/material/Paper'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import { MoreHoriz } from '@mui/icons-material'
-import { Box } from '@mui/material'
 
 
 const Home = () => {
@@ -30,10 +29,10 @@ const Home = () => {
                         <TableHead>
                             <TableRow>
                             <TableCell sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>What</TableCell>
-                            <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Where</TableCell>
-                            <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Category</TableCell>
-                            <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Price</TableCell>
-                            <TableCell align="right" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Ease of organization</TableCell>
+                            <TableCell align="left" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Where</TableCell>
+                            <TableCell align="left" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Category</TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Price</TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Ease of organization</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -53,12 +52,22 @@ const Home = () => {
                                                 <MoreHoriz sx={{ mr: 0.5 }} fontSize="inherit" />
                                         </Link>
                                     </TableCell>
-                                    <TableCell align="right">{visit.where}</TableCell>
-                                    <TableCell align="right">
-                                        {visit.category.map(cat => <div key={cat}> {cat}</div> )}
+                                    <TableCell align="left">{visit.where}</TableCell>
+                                    <TableCell align="center">
+                                        {visit.category.map(cat => 
+                                            <div key={cat}> 
+                                                <Link
+                                                    underline="hover"
+                                                    sx={{ display: 'flex', alignItems: 'center' }}
+                                                    color="inherit"
+                                                    component={RouterLink}
+                                                    to={`/visits/category/${cat}`}>
+                                                        {cat}
+                                                    </Link>
+                                            </div> )}
                                     </TableCell>
-                                    <TableCell align="right">{visit.priceCategory}</TableCell>
-                                    <TableCell align="right">{visit.easeOfOrganization}</TableCell>
+                                    <TableCell align="center">{visit.priceCategory}</TableCell>
+                                    <TableCell align="center">{visit.easeOfOrganization}</TableCell>
 
                                 </TableRow>
                             ))}
