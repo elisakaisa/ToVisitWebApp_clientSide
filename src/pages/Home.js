@@ -13,6 +13,8 @@ import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import { MoreHoriz } from '@mui/icons-material'
 import VisitTable from '../components/VisitTable'
+import SimpleTableHead from '../components/table/SimpleTableHead'
+import SimpleTableBody from '../components/table/SimpleTableBody'
 
 
 const Home = () => {
@@ -24,7 +26,12 @@ const Home = () => {
             <Typography variant="h5" component="div" sx= {{ p:1, m:1 }} gutterBottom>
                 Places to visit in the Stockholm area
             </Typography>
-            <VisitTable visits={visits} />
+            <TableContainer components={Paper}>
+                    <Table sx={{ minWidth: 650}} aria-label="simple table">
+                        <SimpleTableHead />
+                        <SimpleTableBody visits={visits}/>
+                    </Table>
+            </TableContainer>
         </>  
     )
 }
