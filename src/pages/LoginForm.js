@@ -17,7 +17,7 @@ const LoginForm = () => {
     // logged in user
     const user = useSelector((state) => state.login)
 
-    // to navigate to home after used is logged in
+    // to navigate to home after user is logged in
     useEffect(() => {
         if (user.token) {
           navigate('/');
