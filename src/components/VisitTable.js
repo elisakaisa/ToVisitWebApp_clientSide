@@ -14,7 +14,7 @@ const VisitTable = ({ visits }) => {
 
     // states
     const [sortedVisits, setSortedVisits] = useState(visits)
-    const [order, setOrder] = useState('asc');
+    const [order, setOrder] = useState('desc');
     const [orderBy, setOrderBy] = useState('what')
 
     // ma  kes sure the state is actually saved, otherwise empty array
@@ -43,6 +43,16 @@ const VisitTable = ({ visits }) => {
         setOrder(isAsc ? 'desc' : 'asc')
         setOrderBy('where')
     }
+    const onSortEase = () => {
+        if (order === 'asc') {
+            setSortedVisits([...visits].sort((a, b) => a.easeOfOrganization.localeCompare(b.easeOfOrganization)))
+        } else {
+            setSortedVisits([...visits].sort((a, b) => b.easeOfOrganization.localeCompare(a.easeOfOrganization)))
+        }
+        const isAsc = orderBy === 'ease' && order === 'asc';
+        setOrder(isAsc ? 'desc' : 'asc')
+        setOrderBy('ease')
+    }
 
     return (
         <Paper elevation={3} sx= {{ p:1, backgroundColor: '#040a1a' }}>
@@ -62,14 +72,21 @@ const VisitTable = ({ visits }) => {
                                 <TableSortLabel 
                                     onClick={onSortWhere}
                                     active={orderBy === 'where'}
-                                    active={orderBy === 'where'}
                                     direction={orderBy === 'where' ? order : 'asc'}>
                                         Where
                                 </TableSortLabel>
                             </TableCell>
                             <TableCell align="left" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Category</TableCell>
                             <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Price</TableCell>
-                            <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Ease of organization</TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>
+                                <TableSortLabel 
+                                    onClick={onSortEase}
+                                    active={orderBy === 'ease'}
+                                    direction={orderBy === 'ease' ? order : 'asc'}>
+                                        Ease
+                                </TableSortLabel>
+                            </TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: 'h7.fontSize'}}>Time frame</TableCell>
                             </TableRow>
                         </TableHead>
                         <SimpleTableBody visits={sortedVisits}/>

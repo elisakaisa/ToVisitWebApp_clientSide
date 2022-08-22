@@ -42,7 +42,7 @@ const SimpleTableBody = ({ visits }) => {
                     </TableCell>
                     <TableCell align="center">{visit.priceCategory}</TableCell>
                     <TableCell align="center">{visit.easeOfOrganization}</TableCell>
-
+                    <TableCell align="center">{visit.timeLength}</TableCell>
                 </TableRow>
             ))}
         </TableBody>

@@ -71,12 +71,11 @@ const updateVisit = async (visit) => {
 
 const removeVisit = async (id) => {
     try {
-        /*const config = {
+        const config = {
             headers: { Authorization: token },
-        } */ //TODO: add token?
+        }
 
-        //const response = await axios.delete(`${baseUrl}/${id}`, config)
-        const response = await axios.delete(`${baseUrl}/${id}`)
+        const response = await axios.delete(`${baseUrl}/${id}`, config)
         return response.data
     } catch (error) {
         if (error.response.data.error) {
