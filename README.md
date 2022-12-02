@@ -3,7 +3,7 @@
 Web-app to view, create, edit and delete spots to visit in the Stockholm area.
 The backend is a RestApi using node.js, the frontend is in ReactJS.
 
-Can be accessed online [here](https://pacific-spire-62523.herokuapp.com/).
+Can be accessed online [here](https://to-visit-webapp.up.railway.app/) (deployed with railway).
 
 The back-end part can be viewed [here](https://github.com/elisakaisa/ToVisitWebApp)
 
